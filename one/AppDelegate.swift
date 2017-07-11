@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     var window: UIWindow?
     let gmsServicesKey = "AIzaSyDv0c_Pex5ITEYP1lB_BgXeNDf5-d3xMzE"
 
-    var htmlCont:String?
+//    var htmlCont:Array<[String]> = []
+    var jsonResults:Array<Dictionary<String,String>> = []
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     
-    private let myData = ["1","2","3"]
+    private let myData = ["1","2","3","4"]
     
     
     
@@ -41,6 +41,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     private func gotoVC(whereVC:Int){
         switch (whereVC){
+        case 3 :
+            if let v4 = storyboard?.instantiateViewController(withIdentifier: "V5"){
+                show(v4, sender : self)
+            }
+            
+            break
         case 2 :
             if let vc1 = storyboard?.instantiateViewController(withIdentifier: "vc1"){
                 show(vc1, sender : self)
