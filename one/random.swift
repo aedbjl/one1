@@ -46,6 +46,7 @@ class random: UIViewController {
         imgView.image = imgs[rand]
         text.text = str[rand]
         
+        
     }
     
     
