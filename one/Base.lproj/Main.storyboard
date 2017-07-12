@@ -48,7 +48,7 @@
                                         <rect key="frame" x="0.0" y="28" width="247" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m57-UQ-5gq" id="8QI-2O-etz">
-                                            <rect key="frame" x="0.0" y="0.0" width="247" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="247" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -98,7 +98,7 @@
                                         <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hNl-2r-mmG" id="lng-kt-0yG">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgr-yx-Ej8">
@@ -125,6 +125,14 @@
                                     <outlet property="delegate" destination="mZL-il-w4b" id="UfE-m8-cQg"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQN-qM-VcI">
+                                <rect key="frame" x="105" y="543" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="next:" destination="mZL-il-w4b" eventType="touchUpInside" id="JIj-tT-xby"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -135,6 +143,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r41-TJ-hsD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1288.8" y="599.55022488755628"/>
+        </scene>
+        <!--Random-->
+        <scene sceneID="snF-RV-JaZ">
+            <objects>
+                <viewController storyboardIdentifier="random" id="dZ4-OL-yOd" customClass="random" customModule="one" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pm2-BK-JHl"/>
+                        <viewControllerLayoutGuide type="bottom" id="IaG-pr-nkL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Crh-DW-UTP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-Q8-E73">
+                                <rect key="frame" x="67" y="256" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ct-xF-UE9">
+                                <rect key="frame" x="175" y="116" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="down:" destination="dZ4-OL-yOd" eventType="touchDown" id="5wn-XR-ePa"/>
+                                    <action selector="outside:" destination="dZ4-OL-yOd" eventType="touchUpOutside" id="g2s-Yo-E67"/>
+                                    <action selector="up:" destination="dZ4-OL-yOd" eventType="touchUpInside" id="nb0-sY-FrG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zjq-Dg-45y">
+                                <rect key="frame" x="67" y="202" width="240" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imgView" destination="XDS-Q8-E73" id="6ww-kB-ifa"/>
+                        <outlet property="text" destination="Zjq-Dg-45y" id="Rox-Nr-DYw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T7m-r0-gq9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1960.8" y="668.81559220389806"/>
         </scene>
         <!--VC1-->
         <scene sceneID="zSV-jJ-dD4">
@@ -239,6 +292,14 @@
                                 <state key="normal" title="Delegate!!!!"/>
                                 <connections>
                                     <action selector="showHtml:" destination="NMC-mI-arb" eventType="touchUpInside" id="VB1-la-vbG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnC-gq-e0o">
+                                <rect key="frame" x="117" y="483" width="138" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="updata"/>
+                                <connections>
+                                    <action selector="updata:" destination="NMC-mI-arb" eventType="touchUpInside" id="vjj-9P-7us"/>
                                 </connections>
                             </button>
                         </subviews>

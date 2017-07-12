@@ -6,6 +6,9 @@ class vc2: UIViewController, CLLocationManagerDelegate {
     let lmgr = CLLocationManager()
     let app = UIApplication.shared.delegate as! AppDelegate
     var counter = 0
+    let fmgr = FileManager.default
+    let docDir = NSHomeDirectory() + "/Documents"
+    private var photoDir:String?
 
     
     @IBAction func showHtml(_ sender: Any) {
@@ -17,6 +20,7 @@ class vc2: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initStat()
         
         
         lmgr.requestAlwaysAuthorization()
@@ -77,48 +81,113 @@ class vc2: UIViewController, CLLocationManagerDelegate {
                         if key == "results" {
 
                             for k in val as! [AnyObject] {
-                                print("name:\(k["name"] as! String)")
-                                print("place_id:\(k["place_id"] as! String)")
+//                                print("name:\(k["name"] as! String)")
+//                                print("place_id:\(k["place_id"] as! String)")
 
                     
                                 let arr = k["photos"] as? Array<Dictionary<String,Any>>
                                 
-                                print((arr?[0]["photo_reference"]) as? String as Any)
+//                                print((arr?[0]["photo_reference"]) as? String as Any)
                                 
-                                self.app.jsonResults += [[:]]
-                                
-                                self.app.jsonResults[self.counter]["name"] = (k["name"] as! String)
+//                                self.app.jsonResults += [[:]]
+                                self.app.jsonResults.append(["name":k["name"] as! String])
+//                                self.app.jsonResults[self.counter]["name"] = (k["name"] as! String)
                                 self.app.jsonResults[self.counter]["place_id"] =
                                     (k["place_id"] as! String)
                                 self.app.jsonResults[self.counter]["photo_reference"] = (arr?[0]["photo_reference"] as? String ?? "")
                                 self.counter += 1
 //                                self.app.jsonResults += ["name:\(k["name"] as! String),place_id:\(k["place_id"] as! String),photo_reference:\(arr?[0]["photo_reference"] as? String ?? "")"]
+                                
                             }
-                    
-                           
-                            
-
+ 
                         }
-                        
-                       
-                        
-                        
+    
                     }
                     
                 }
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+   
             }
         })
     }
+    
+    
+    @IBAction func updata(_ sender: Any) {
+        pic()
+    }
+    
+    
+    
+    private func wgetPhoto(_ url_string: String, toPath: String ) throws {
+        let url = URL(string: url_string)
+        let req = URLRequest(url: url!)
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: req, completionHandler: {(data, resp, error) in
+            
+            if error == nil {
+                print("wgetPhoto() OK")
+                
+                DispatchQueue.global().async {
+                    self.saveFile(data: data!, destination: toPath )
+                }
+                
+            } else {
+                print("wgetPhoto() fails")
+            }
+        })
+        
+        task.resume()
+    }
+    
+    private func saveFile(data: Data, destination: String) {
+        let url = URL(fileURLWithPath: destination )
+        do {
+            try data.write(to: url )
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    
+    private func pic() {
+        DispatchQueue.main.async {
+            
+            self.initStat()
+            do {
+                for i in self.app.jsonResults {
+                    
+                    let photoURL_str = String("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(i["place_reference"] as! String)&key=\(self.app.gmsServicesKey)")
+                    
+                    let photoPath_str = self.photoDir! + "/" + (i["place_id"] as! String) + ".jpg"
+                    
+                    if !self.fmgr.fileExists(atPath: photoPath_str) {
+                        try self.wgetPhoto(photoURL_str!, toPath: photoPath_str)
+                        
+                        
+                    }
+                }
+                
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    private func initStat() {
+        
+        self.photoDir = self.docDir + "/placePhoto"
+        
+        if !self.fmgr.fileExists(atPath: self.photoDir!) {
+            do {
+                try self.fmgr.createDirectory(atPath: self.photoDir!, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+    }
+
+    
+    
+    
 }

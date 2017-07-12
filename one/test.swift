@@ -13,13 +13,15 @@ class test: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(app.jsonResults)
         
-        for i in app.jsonResults {
-        print(i["name"]!)
-        print(i["place_id"]!)
-        print(i["photo_reference"]!)
-            
-        }
+        
+//        for i in app.jsonResults {
+//        print(i["name"]!)
+//        print(i["place_id"]!)
+//        print(i["photo_reference"]!)
+//        
+//        }
         // Do any additional setup after loading the view.
     }
 

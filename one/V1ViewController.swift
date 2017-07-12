@@ -10,14 +10,22 @@ import UIKit
 
 class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSource{
     
-     let app = UIApplication.shared.delegate as! AppDelegate
+    let app = UIApplication.shared.delegate as! AppDelegate
     var counter = 0
     let fmgr = FileManager.default
     let docDir = NSHomeDirectory() + "/Documents"
     private var photoDir:String?
+//    var  mydata:Array<String> = []
+
+
     
     
-    
+    @IBAction func next(_ sender: Any) {
+        if let v4 = storyboard?.instantiateViewController(withIdentifier: "random"){
+            show(v4, sender : self)
+        }
+        
+    }
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -32,18 +40,15 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resCell") as! CustomTableViewCell
-        
-                
-        
-        
-        
-        
-        
-        
-        let photoPath_str = photoDir! + "/" + ( app.jsonResults[indexPath.row]["place_id"]! ) + ".jpg"
+
+        let photoPath_str = photoDir! + "/" + ( app.jsonResults[indexPath.row]["place_id"] as! String ) + ".jpeg"
         if fmgr.fileExists(atPath: photoPath_str) {
+            DispatchQueue.main.async {
+                cell.imgView.image = UIImage(contentsOfFile: photoPath_str)
+                
+                
+            }
             
-            cell.imgView.image = UIImage(contentsOfFile: photoPath_str)
             
         } else {
             
@@ -53,10 +58,10 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
         
         
         
-        cell.label.text = self.app.jsonResults[indexPath.row]["name"]!
+        cell.label.text = self.app.jsonResults[indexPath.row]["name"] as! String
+ 
         
-        
-        
+//        self.app.mydata += [self.app.jsonResults[indexPath.row]["name"]!]
         
         
         
@@ -64,6 +69,10 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
         
     }
 
+    
+   
+    
+    
     private func wgetPhoto(_ url_string: String, toPath: String ) throws {
         let url = URL(string: url_string)
         let req = URLRequest(url: url!)
@@ -92,33 +101,71 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
         } catch {
             print(error)
         }
+       
+        
+        
+        
     }
     
     
     
-//    private func pic() {
-//        DispatchQueue.main.async {
-//            
-//            self.initStat()
-//            do {
-//                
-//                let photoURL_str = String("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(self.app.jsonResults[indexPath.row]["place_reference"]! )&key=\(self.app.gmsServicesKey)")
-//                
-//                let photoPath_str = self.photoDir! + "/" + ( self.app.jsonResults[indexPath.row]["place_id"]! ) + ".jpg"
-//                
-//                if !self.fmgr.fileExists(atPath: photoPath_str) {
-//                    try self.wgetPhoto(photoURL_str!, toPath: photoPath_str)
-//                    
-//                    
-//                }
-//                
-////                self.counter += 1
-//                
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
+    
+    
+    private func pic() {
+        DispatchQueue.main.async {
+            
+            self.initStat()
+            do {
+                
+                
+                  for i in 0..<self.app.jsonResults.count {
+                    var placeRef = self.app.jsonResults[i]["photo_reference"] ?? ""
+                    let photoURL_str = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(placeRef)&key=\(self.app.gmsServicesKey)"
+                    
+                    let photoPath_str = self.photoDir! + "/" + (self.app.jsonResults[i]["place_id"] as! String) + ".jpeg"
+                    
+                    if !self.fmgr.fileExists(atPath: photoPath_str) {
+                        try self.wgetPhoto(photoURL_str, toPath: photoPath_str)
+                        
+//                        var img = UIImage(named: "")
+//                        [UIImage,UIImage]
+//                        var myimage = [img]
+                        
+//                        var img = UIImage(contentsOfFile: photoPath_str)
+//                        self.app.myimage += [img!]
+                        
+//                        myimage += [UIImage(contentsOfFile: photoPath_str)]
+                    
+                    }
+                    
+//                    let placeID:String = i["place_id"]! as! String
+                    let img = UIImage(contentsOfFile: photoPath_str)
+                    self.app.jsonResults[i]["img"] = img
+//                    print(placeID)
+//                    print(img?.description)
+//                    self.app.myImgDict[placeID] = img
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                print(self.app.myImgDict.description)
+
+                
+            } catch {
+                print(error)
+            }
+            
+            
+           
+
+            
+            
+        }
+    
+    }
     
     private func initStat() {
         
@@ -148,6 +195,8 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
 //        for i in 0...app.jsonResults.count{
 //            pic()
 //        }
+        pic()
+        print(docDir)
         // Do any additional setup after loading the view.
     }
 
