@@ -46,15 +46,15 @@ class vc2: UIViewController, CLLocationManagerDelegate {
     
     // Add a UIButton in Interface Builder, and connect the action to this function.
     @IBAction func pickPlace(_ sender: UIButton) {
-//        let dir2 = docDir + "/placePhoto"
-//        do{
-//            if fmgr.fileExists(atPath: dir2){
-//                try fmgr.removeItem(atPath: dir2)
-//            }
-//            
-//        } catch {
-//            print(error)
-//        }
+        let dir2 = docDir + "/placePhoto"
+        do{
+            if fmgr.fileExists(atPath: dir2){
+                try fmgr.removeItem(atPath: dir2)
+            }
+            
+        } catch {
+            print(error)
+        }
         
         let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
         let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)

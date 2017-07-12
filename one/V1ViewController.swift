@@ -21,6 +21,13 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
     
     
     @IBAction func next(_ sender: Any) {
+        for i in 0..<self.app.jsonResults.count {
+            let photoPath_str = photoDir! + "/" + ( app.jsonResults[i]["place_id"] as! String ) + ".jpeg"
+            let img = UIImage(contentsOfFile: photoPath_str)
+            self.app.jsonResults[i]["img"] = img
+        }
+        
+        
         if let v4 = storyboard?.instantiateViewController(withIdentifier: "random"){
             show(v4, sender : self)
         }
@@ -140,7 +147,8 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
 //                        self.app.myimage += [img!]
                         
 //                        myimage += [UIImage(contentsOfFile: photoPath_str)]
-                    
+//                        let img = UIImage(contentsOfFile: photoPath_str)
+//                        self.app.jsonResults[i]["img"] = img
                     }
                     
 //                    let placeID:String = i["place_id"]! as! String
