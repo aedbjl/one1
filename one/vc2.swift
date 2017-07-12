@@ -18,11 +18,24 @@ class vc2: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    private func initStat() {
+        
+        self.photoDir = self.docDir + "/placePhoto"
+        
+        if !self.fmgr.fileExists(atPath: self.photoDir!) {
+            do {
+                try self.fmgr.createDirectory(atPath: self.photoDir!, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initStat()
-        
-        
+
         lmgr.requestAlwaysAuthorization()
         lmgr.delegate = self
         lmgr.startUpdatingLocation()
@@ -33,6 +46,16 @@ class vc2: UIViewController, CLLocationManagerDelegate {
     
     // Add a UIButton in Interface Builder, and connect the action to this function.
     @IBAction func pickPlace(_ sender: UIButton) {
+//        let dir2 = docDir + "/placePhoto"
+//        do{
+//            if fmgr.fileExists(atPath: dir2){
+//                try fmgr.removeItem(atPath: dir2)
+//            }
+//            
+//        } catch {
+//            print(error)
+//        }
+        
         let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
         let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
         let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001, longitude: center.longitude - 0.001)
@@ -174,18 +197,7 @@ class vc2: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    private func initStat() {
-        
-        self.photoDir = self.docDir + "/placePhoto"
-        
-        if !self.fmgr.fileExists(atPath: self.photoDir!) {
-            do {
-                try self.fmgr.createDirectory(atPath: self.photoDir!, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error)
-            }
-        }
-    }
+   
 
     
     

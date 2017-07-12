@@ -14,10 +14,11 @@ class random: UIViewController {
     var imgs:[UIImage] = []
     var str:[String] = []
     @IBAction func down(_ sender: Any) {
-        
+//        ?? UIImage()
+        //            print(obj["img"])
         for obj in app.jsonResults {
             imgs += [obj["img"] as? UIImage ?? UIImage()]
-//            print(obj["img"])
+
             str += [obj["name"] as! String]
             
         }
@@ -50,6 +51,14 @@ class random: UIViewController {
     }
     
     
+    @IBAction func back(_ sender: Any) {
+        
+        if let v4 = storyboard?.instantiateViewController(withIdentifier: "vc2"){
+            app.jsonResults = []
+            show(v4, sender : self)
+        }
+       
+    }
     
     
     @IBOutlet weak var text: UILabel!
@@ -66,7 +75,7 @@ class random: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(app.myImgDict)
+        print(app.jsonResults)
         // Do any additional setup after loading the view.
     }
 

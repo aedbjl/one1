@@ -25,6 +25,8 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
             show(v4, sender : self)
         }
         
+        
+        
     }
     @IBOutlet weak var tableView: UITableView!
     
@@ -114,7 +116,7 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
     private func pic() {
         DispatchQueue.main.async {
             
-            self.initStat()
+                       
             do {
                 
                 
@@ -123,6 +125,9 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
                     let photoURL_str = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(placeRef)&key=\(self.app.gmsServicesKey)"
                     
                     let photoPath_str = self.photoDir! + "/" + (self.app.jsonResults[i]["place_id"] as! String) + ".jpeg"
+                    
+                    
+                    
                     
                     if !self.fmgr.fileExists(atPath: photoPath_str) {
                         try self.wgetPhoto(photoURL_str, toPath: photoPath_str)
@@ -177,6 +182,10 @@ class V1ViewController: UIViewController,UITableViewDelegate ,UITableViewDataSou
             } catch {
                 print(error)
             }
+        }else {
+            
+            
+            
         }
     }
 
