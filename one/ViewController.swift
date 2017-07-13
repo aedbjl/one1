@@ -32,6 +32,9 @@ class ViewController: UIViewController {
 //    }
 //    
     
+    
+    @IBOutlet weak var img: UIImageView!
+    
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBAction func gotovc2(_ sender: Any) {
         if let vc2 = storyboard?.instantiateViewController(withIdentifier: "vc2"){
@@ -77,7 +80,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        welcomeLabel.text = "WELCOME!!"
+        welcomeLabel.text = "HI!! 歡迎來到 \"就這間了\" "
         // Do any additional setup after loading the view, typically from a nib.
     }
 

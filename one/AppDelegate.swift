@@ -15,9 +15,12 @@ import GooglePlacePicker
 class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
-    let gmsServicesKey = "AIzaSyDv0c_Pex5ITEYP1lB_BgXeNDf5-d3xMzE"
-
-//    var htmlCont:Array<[String]> = []
+    let gmsServicesKey = "AIzaSyDYnzlyg91XfGQp67GUMVgwSponQ1Aab4Q"
+      //AIzaSyDYnzlyg91XfGQp67GUMVgwSponQ1Aab4Q
+    //AIzaSyDv0c_Pex5ITEYP1lB_BgXeNDf5-d3xMzE
+    
+  
+    //    var htmlCont:Array<[String]> = []
     var jsonResults:Array<Dictionary<String,Any>> = []
     var myImgDict:Dictionary<String,UIImage> = [:]
     var mydata:Array<String> = []
@@ -27,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
 //        GMSServices.provideAPIKey("AIzaSyDv0c_Pex5ITEYP1lB_BgXeNDf5-d3xMzE")
         GMSServices.provideAPIKey(gmsServicesKey)
-        GMSPlacesClient.provideAPIKey("AIzaSyCVMCjEmHGDJW_FCrowCSyURwpSJt-M-Po")
+    GMSPlacesClient.provideAPIKey("AIzaSyCVMCjEmHGDJW_FCrowCSyURwpSJt-M-Po")
         
         
         

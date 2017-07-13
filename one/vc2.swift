@@ -39,6 +39,8 @@ class vc2: UIViewController, CLLocationManagerDelegate {
         lmgr.requestAlwaysAuthorization()
         lmgr.delegate = self
         lmgr.startUpdatingLocation()
+        addressLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        addressLabel.numberOfLines = 0
     }
     // Add a pair of UILabels in Interface Builder, and connect the outlets to these variables.
     @IBOutlet var nameLabel: UILabel!
@@ -74,6 +76,7 @@ class vc2: UIViewController, CLLocationManagerDelegate {
                 self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
                     .joined(separator: "\n")
                 print("Place attributions \(place.placeID)")
+               
             } else {
                 self.nameLabel.text = "No place selected"
                 self.addressLabel.text = ""
@@ -134,9 +137,7 @@ class vc2: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    @IBAction func updata(_ sender: Any) {
-        pic()
-    }
+    
     
     
     
